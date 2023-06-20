@@ -1,3 +1,3 @@
-# terraform-cdk-typescript
+# Terraform CDK (typescript)
 
-Testing out terraform CDK in typescript
+Terraform CDK in typescript, multiple stacks and providers.
