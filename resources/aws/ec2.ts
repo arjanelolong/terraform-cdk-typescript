@@ -1,5 +1,6 @@
 import { AwsProvider } from '@cdktf/provider-aws/lib/provider';
 import { Instance } from '@cdktf/provider-aws/lib/instance';
+import { defaultTags } from '../../lib/contants';
 import { Stack } from '../../types';
 
 export default (params: Stack ) =>{
@@ -14,7 +15,8 @@ export default (params: Stack ) =>{
     ami: 'ami-2757f631',
     instanceType: 't2.micro',
     tags: {
-      terraform: 'TRUE',
+      ...defaultTags,
+      environment,
     },
   });
 }
