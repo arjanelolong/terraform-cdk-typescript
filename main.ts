@@ -2,33 +2,14 @@
 // SPDX-License-Identifier: MPL-2.0
 import { Construct } from 'constructs';
 import { App, TerraformStack } from 'cdktf';
-import { AwsProvider } from '@cdktf/provider-aws/lib/provider';
-import { Instance } from '@cdktf/provider-aws/lib/instance';
-
-
-interface MyStackConfig {
-  environment: string;
-  region?: string;
-}
+import AWSResources from './resources/aws'
+import { Config } from './types';
 
 class MyStack extends TerraformStack {
-  constructor(scope: Construct, id: string, config: MyStackConfig) {
+  constructor(scope: Construct, id: string, config: Config) {
     super(scope, id);
 
-    const { region, environment } = config
-
-    new AwsProvider(this, 'aws', {
-      region,
-    });
-
-    new Instance(this, `ec2-${environment}`, {
-      ami: 'ami-2757f631',
-      instanceType: 't2.micro',
-      tags: {
-        terraform: 'TRUE',
-      },
-    });
-
+    AWSResources({ stack: this, config });
   }
 }
 
